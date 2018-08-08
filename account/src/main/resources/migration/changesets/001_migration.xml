@@ -1,0 +1,39 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="1-create-account-table" author="x">
+        <comment>Create account table</comment>
+
+        <createTable tableName="account">
+            <column name="owner" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false"></constraints>
+            </column>
+            <column name="account_number" type="varchar(255)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="overdraft_limit" type="bigint">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2-load-account-data" author="x">
+        <comment>Load accounts from csv</comment>
+
+        <loadData catalogName="catalog"
+                  encoding="UTF-8"
+                  file="migration/data/account.csv"
+                  quotchar="&quot;"
+                  schemaName="public"
+                  separator=","
+                  tableName="account">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

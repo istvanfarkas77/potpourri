@@ -1,0 +1,40 @@
+#spring:
+#  h2:
+#    console.enabled: true
+#    console.path: /h2
+#  jackson:
+#    serialization:
+#      WRITE_DATES_AS_TIMESTAMPS: false
+#    serialization-inclusion: non_null
+#    default-property-inclusion: non_null
+#  datasource:
+#    url: jdbc:h2:mem:db
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#    password: sa
+#    hikari:
+#      idle-timeout: 10000
+#      minimum-idle: 2
+#      maximum-pool-size: 5
+#      pool-name: h2-db-pool
+#      connection-test-query: "select 1"
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#  liquibase:
+#    change-log: classpath:migration/account-liquibase-changelog.xml
+logging:
+  pattern:
+    console: "%date{ISO8601} [%thread] %level %logger - %msg%n"
+  level:
+    ROOT: DEBUG
+    com.potpourri: TRACE
+    org.springframework.web: DEBUG
+    liquibase.integration.spring: ERROR
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
